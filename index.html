@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>My Little Grocery Run</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+</head>
+
+
+<body>
+
+  <main class="page">
+
+
+    <header class="page-header">
+
+      <h1>My Little Grocery Run</h1>
+
+      <p>
+        Click the groceries to put them in the basket.
+      </p>
+
+    </header>
+
+
+    <section class="grocery-scene">
+
+
+      <!-- CONDENSED MILK -->
+
+      <button
+        class="grocery-item condensed"
+        data-item="condensed"
+        type="button"
+        aria-label="Add condensed milk to basket"
+      >
+
+        <img
+          src="images/condensed-milk.png"
+          alt="Sweetened condensed milk"
+        >
+
+      </button>
+
+
+
+      <!-- CLINKERS -->
+
+      <button
+        class="grocery-item clinkers"
+        data-item="clinkers"
+        type="button"
+        aria-label="Add Clinkers to basket"
+      >
+
+        <img
+          src="images/clinkers.png"
+          alt="Pascal Clinkers"
+        >
+
+      </button>
+
+
+
+      <!-- COFFEE -->
+
+      <button
+        class="grocery-item coffee"
+        data-item="coffee"
+        type="button"
+        aria-label="Add coffee to basket"
+      >
+
+        <img
+          src="images/coffee.png"
+          alt="UCC coffee"
+        >
+
+      </button>
+
+
+
+      <!-- GUMMY -->
+
+      <button
+        class="grocery-item gummy"
+        data-item="gummy"
+        type="button"
+        aria-label="Add gummy candy to basket"
+      >
+
+        <img
+          src="images/gummy.png"
+          alt="Gummy candy"
+        >
+
+      </button>
+
+
+
+      <!-- ICE CREAM -->
+
+      <button
+        class="grocery-item icecream"
+        data-item="icecream"
+        type="button"
+        aria-label="Add ice cream to basket"
+      >
+
+        <img
+          src="images/icecream.png"
+          alt="Ben and Jerry's ice cream"
+        >
+
+      </button>
+
+
+
+      <!-- KOMBUCHA -->
+
+      <button
+        class="grocery-item kombucha"
+        data-item="kombucha"
+        type="button"
+        aria-label="Add kombucha to basket"
+      >
+
+        <img
+          src="images/kombucha.png"
+          alt="Lemon kombucha"
+        >
+
+      </button>
+
+
+
+      <!-- SNICKERS -->
+
+      <button
+        class="grocery-item snickers"
+        data-item="snickers"
+        type="button"
+        aria-label="Add Snickers to basket"
+      >
+
+        <img
+          src="images/snickers.png"
+          alt="Snickers"
+        >
+
+      </button>
+
+
+
+      <!-- COOKIES -->
+
+      <button
+        class="grocery-item cookies"
+        data-item="cookies"
+        type="button"
+        aria-label="Add cookies to basket"
+      >
+
+        <img
+          src="images/cookies.png"
+          alt="Celebration Mini cookies"
+        >
+
+      </button>
+
+
+      <div class="basket">
+
+
+        <div
+          class="basket-items"
+          id="basketItems"
+        ></div>
+
+        <img
+          class="basket-image"
+          src="images/basket.png"
+          alt="Shopping basket"
+        >
+
+      </div>
+
+      <p
+        class="counter"
+        id="counter"
+      >
+        0 / 8 items
+      </p>
+
+
+    </section>
+
+  </main>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

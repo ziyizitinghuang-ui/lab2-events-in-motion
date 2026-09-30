@@ -1,0 +1,602 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  min-height: 100vh;
+
+  background: #f4efe5;
+  color: #292620;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  overflow-x: hidden;
+}
+
+
+.page {
+  width: 100%;
+  min-height: 100vh;
+
+  padding-top: 35px;
+  padding-bottom: 45px;
+
+  position: relative;
+}
+
+
+.page-header {
+  position: relative;
+  z-index: 100;
+
+  text-align: center;
+}
+
+.page-header h1 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(52px, 5vw, 78px);
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: -2px;
+
+  color: #292620;
+}
+
+.page-header p {
+  margin: 18px 0 0;
+
+  font-size: 17px;
+
+  color: #625d55;
+}
+
+
+.grocery-scene {
+  width: min(1200px, 94vw);
+  height: 720px;
+
+  margin: 5px auto 0;
+
+  position: relative;
+}
+
+
+
+.grocery-item {
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  position: absolute;
+
+  cursor: pointer;
+
+  z-index: 30;
+
+  user-select: none;
+  -webkit-user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  transition:
+    transform 0.22s ease,
+    opacity 0.28s ease,
+    filter 0.22s ease;
+}
+
+
+.grocery-item img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  filter:
+    drop-shadow(
+      0 9px 7px
+      rgba(45, 34, 25, 0.18)
+    );
+}
+
+
+
+.grocery-item:hover {
+  transform:
+    translateY(-7px)
+    rotate(var(--rotation))
+    scale(1.055);
+
+  z-index: 50;
+}
+
+
+.grocery-item:focus-visible {
+  outline:
+    2px solid
+    rgba(73, 57, 43, 0.6);
+
+  outline-offset: 5px;
+}
+
+
+.grocery-item.added {
+  opacity: 0;
+
+  pointer-events: none;
+
+  transform:
+    scale(0.75)
+    rotate(var(--rotation));
+}
+
+/* condensed milk */
+
+.grocery-item.condensed {
+  width: 86px;
+  height: 170px;
+
+  left: 145px;
+  top: 55px;
+
+  --rotation: 4deg;
+
+  transform:
+    rotate(var(--rotation));
+}
+
+
+/* clinkers */
+
+.grocery-item.clinkers {
+  width: 150px;
+  height: 205px;
+
+  left: 325px;
+  top: 20px;
+
+  --rotation: -6deg;
+
+  transform:
+    rotate(var(--rotation));
+}
+
+
+/* coffee */
+
+.grocery-item.coffee {
+  width: 105px;
+  height: 160px;
+
+  left: 630px;
+  top: 30px;
+
+  --rotation: 2deg;
+
+  transform:
+    rotate(var(--rotation));
+}
+
+
+/* gummy */
+
+.grocery-item.gummy {
+  width: 120px;
+  height: 125px;
+
+  right: 100px;
+  top: 145px;
+
+  --rotation: 8deg;
+
+  transform:
+    rotate(var(--rotation));
+}
+
+
+/* ice cream */
+
+.grocery-item.icecream {
+  width: 150px;
+  height: 170px;
+
+  left: -15px;
+  top: 300px;
+
+  --rotation: -7deg;
+
+  transform:
+    rotate(var(--rotation));
+}
+
+
+/* kombucha */
+
+.grocery-item.kombucha {
+  width: 125px;
+  height: 190px;
+
+  right: -5px;
+  top: 325px;
+
+  --rotation: 5deg;
+
+  transform:
+    rotate(var(--rotation));
+}
+
+
+/* snickers */
+
+.grocery-item.snickers {
+  width: 170px;
+  height: 72px;
+
+  left: 60px;
+  top: 525px;
+
+  --rotation: 4deg;
+
+  transform:
+    rotate(var(--rotation));
+}
+
+
+/* cookies */
+
+.grocery-item.cookies {
+  width: 180px;
+  height: 185px;
+
+  right: 120px;
+  top: 475px;
+
+  --rotation: -8deg;
+
+  transform:
+    rotate(var(--rotation));
+}
+
+.basket {
+  position: absolute;
+
+  width: 650px;
+  height: 430px;
+
+  left: 50%;
+  top: 285px;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 10;
+}
+
+.basket-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+
+  z-index: 5;
+
+  pointer-events: none;
+
+  mix-blend-mode: multiply;
+}
+
+.basket-items {
+  position: absolute;
+
+  left: 12%;
+  top: 18%;
+
+  width: 76%;
+  height: 65%;
+
+  z-index: 15;
+
+  pointer-events: none;
+
+  overflow: visible;
+}
+
+
+.basket-item {
+  position: absolute;
+
+  display: block;
+
+  object-fit: contain;
+
+  pointer-events: none;
+
+  transform-origin:
+    center center;
+
+  filter:
+    drop-shadow(
+      0 8px 7px
+      rgba(40, 29, 20, 0.25)
+    );
+
+  animation:
+    dropIntoBasket
+    0.5s
+    cubic-bezier(
+      0.2,
+      0.8,
+      0.3,
+      1.15
+    )
+    forwards;
+}
+
+
+.basket-item[data-item="icecream"] {
+  width: 39%;
+  height: 72%;
+
+  left: 0%;
+  top: 27%;
+
+  z-index: 7;
+
+  --basket-rotation: -8deg;
+
+  rotate:
+    var(--basket-rotation);
+}
+
+.basket-item[data-item="kombucha"] {
+  width: 31%;
+  height: 84%;
+
+  left: 9%;
+  top: 5%;
+
+  z-index: 4;
+
+  --basket-rotation: 5deg;
+
+  rotate:
+    var(--basket-rotation);
+}
+
+.basket-item[data-item="condensed"] {
+  width: 25%;
+  height: 86%;
+
+  left: 26%;
+  top: 2%;
+
+  z-index: 5;
+
+  --basket-rotation: 6deg;
+
+  rotate:
+    var(--basket-rotation);
+}
+
+.basket-item[data-item="clinkers"] {
+  width: 43%;
+  height: 94%;
+
+  left: 32%;
+  top: -2%;
+
+  z-index: 8;
+
+  --basket-rotation: -5deg;
+
+  rotate:
+    var(--basket-rotation);
+}
+
+
+.basket-item[data-item="coffee"] {
+  width: 28%;
+  height: 86%;
+
+  left: 58%;
+  top: 3%;
+
+  z-index: 5;
+
+  --basket-rotation: 5deg;
+
+  rotate:
+    var(--basket-rotation);
+}
+
+.basket-item[data-item="gummy"] {
+  width: 35%;
+  height: 69%;
+
+  left: 69%;
+  top: 26%;
+
+  z-index: 9;
+
+  --basket-rotation: 10deg;
+
+  rotate:
+    var(--basket-rotation);
+}
+
+
+.basket-item[data-item="cookies"] {
+  width: 45%;
+  height: 80%;
+
+  left: 48%;
+  top: 24%;
+
+  z-index: 11;
+
+  --basket-rotation: 6deg;
+
+  rotate:
+    var(--basket-rotation);
+}
+
+.basket-item[data-item="snickers"] {
+  width: 55%;
+  height: 34%;
+
+  left: 22%;
+  top: 70%;
+
+  z-index: 12;
+
+  --basket-rotation: -3deg;
+
+  rotate:
+    var(--basket-rotation);
+}
+
+@keyframes dropIntoBasket {
+
+  0% {
+    opacity: 0;
+
+    translate:
+      0
+      -80px;
+
+    scale: 1.18;
+  }
+
+
+  65% {
+    opacity: 1;
+
+    translate:
+      0
+      6px;
+
+    scale: 0.97;
+  }
+
+
+  100% {
+    opacity: 1;
+
+    translate:
+      0
+      0;
+
+    scale: 1;
+  }
+
+}
+
+.counter {
+  position: absolute;
+
+  left: 50%;
+  top: 700px;
+
+  transform:
+    translateX(-50%);
+
+  margin: 0;
+
+  font-size: 16px;
+
+  letter-spacing: 0.3px;
+
+  color: #625d55;
+
+  z-index: 60;
+}
+
+
+.counter.complete {
+  font-weight: 600;
+
+  color: #40382f;
+}
+
+@media (max-width: 1000px) {
+
+  .grocery-scene {
+    width: 1100px;
+
+    left: 50%;
+
+    margin-left: -550px;
+
+    transform:
+      scale(0.84);
+
+    transform-origin:
+      top center;
+  }
+
+}
+
+@media (max-width: 700px) {
+
+  .page {
+    padding-top: 25px;
+  }
+
+
+  .page-header h1 {
+    font-size: 42px;
+
+    letter-spacing: -1px;
+  }
+
+
+  .page-header p {
+    margin-top: 13px;
+
+    font-size: 15px;
+  }
+
+
+  .grocery-scene {
+    transform:
+      scale(0.62);
+
+    margin-top: 10px;
+  }
+
+}
