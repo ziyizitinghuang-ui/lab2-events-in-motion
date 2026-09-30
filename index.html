@@ -3,214 +3,138 @@
 
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My Little Grocery Run</title>
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+  <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
+  <div class="store-background" aria-hidden="true"></div>
+
   <main class="page">
 
-
-    <header class="page-header">
-
+    <header class="header">
       <h1>My Little Grocery Run</h1>
 
-      <p>
-        Click the groceries to put them in the basket.
+      <p class="instruction" id="instruction">
+        What are we getting today?
       </p>
 
+      <div class="hint">
+        <span class="click-hint">
+          Click an item to add it to the basket
+        </span>
+
+        <span class="keyboard-hint">
+          Press <strong>R</strong> to start over
+        </span>
+      </div>
     </header>
 
+    <section class="grocery-area" aria-label="Interactive grocery basket">
 
-    <section class="grocery-scene">
-
-
-      <!-- CONDENSED MILK -->
-
-      <button
-        class="grocery-item condensed"
-        data-item="condensed"
-        type="button"
-        aria-label="Add condensed milk to basket"
-      >
-
+      <!-- Shopping basket -->
+      <div class="basket">
         <img
-          src="images/condensed-milk.png"
-          alt="Sweetened condensed milk"
+          src="images/basket.png"
+          alt="Shopping basket"
+          class="basket-image"
         >
+      </div>
 
-      </button>
-
-
-
-      <!-- CLINKERS -->
-
+      <!-- Grocery items -->
       <button
-        class="grocery-item clinkers"
-        data-item="clinkers"
+        class="grocery grocery-clinkers"
         type="button"
         aria-label="Add Clinkers to basket"
       >
-
-        <img
-          src="images/clinkers.png"
-          alt="Pascal Clinkers"
-        >
-
+        <img src="images/clinkers.png" alt="Pascall Clinkers">
       </button>
 
-
-
-      <!-- COFFEE -->
-
       <button
-        class="grocery-item coffee"
-        data-item="coffee"
+        class="grocery grocery-condensed"
         type="button"
-        aria-label="Add coffee to basket"
+        aria-label="Add condensed milk to basket"
       >
-
-        <img
-          src="images/coffee.png"
-          alt="UCC coffee"
-        >
-
+        <img src="images/condensed-milk.png" alt="Condensed milk">
       </button>
 
-
-
-      <!-- GUMMY -->
-
       <button
-        class="grocery-item gummy"
-        data-item="gummy"
+        class="grocery grocery-icecream"
         type="button"
-        aria-label="Add gummy candy to basket"
+        aria-label="Add Ben and Jerry's ice cream to basket"
       >
-
-        <img
-          src="images/gummy.png"
-          alt="Gummy candy"
-        >
-
+        <img src="images/icecream.png" alt="Ben and Jerry's ice cream">
       </button>
 
-
-
-      <!-- ICE CREAM -->
-
       <button
-        class="grocery-item icecream"
-        data-item="icecream"
-        type="button"
-        aria-label="Add ice cream to basket"
-      >
-
-        <img
-          src="images/icecream.png"
-          alt="Ben and Jerry's ice cream"
-        >
-
-      </button>
-
-
-
-      <!-- KOMBUCHA -->
-
-      <button
-        class="grocery-item kombucha"
-        data-item="kombucha"
-        type="button"
-        aria-label="Add kombucha to basket"
-      >
-
-        <img
-          src="images/kombucha.png"
-          alt="Lemon kombucha"
-        >
-
-      </button>
-
-
-
-      <!-- SNICKERS -->
-
-      <button
-        class="grocery-item snickers"
-        data-item="snickers"
+        class="grocery grocery-snickers"
         type="button"
         aria-label="Add Snickers to basket"
       >
-
-        <img
-          src="images/snickers.png"
-          alt="Snickers"
-        >
-
+        <img src="images/snickers.png" alt="Snickers">
       </button>
 
-
-
-      <!-- COOKIES -->
+      <button
+        class="grocery grocery-coffee"
+        type="button"
+        aria-label="Add coffee to basket"
+      >
+        <img src="images/coffee.png" alt="Coffee">
+      </button>
 
       <button
-        class="grocery-item cookies"
-        data-item="cookies"
+        class="grocery grocery-gummy"
+        type="button"
+        aria-label="Add gummy candy to basket"
+      >
+        <img src="images/gummy.png" alt="Gummy candy">
+      </button>
+
+      <button
+        class="grocery grocery-kombucha"
+        type="button"
+        aria-label="Add kombucha to basket"
+      >
+        <img src="images/kombucha.png" alt="Kombucha">
+      </button>
+
+      <button
+        class="grocery grocery-cookies"
         type="button"
         aria-label="Add cookies to basket"
       >
-
-        <img
-          src="images/cookies.png"
-          alt="Celebration Mini cookies"
-        >
-
+        <img src="images/cookies.png" alt="Celebration cookies">
       </button>
 
+      <!-- Basket status -->
+      <div class="basket-info">
+        <p class="counter" id="counter" aria-live="polite">
+          0 / 8 items
+        </p>
 
-      <div class="basket">
-
-
-        <div
-          class="basket-items"
-          id="basketItems"
-        ></div>
-
-        <img
-          class="basket-image"
-          src="images/basket.png"
-          alt="Shopping basket"
+        <button
+          class="reset-button"
+          id="resetButton"
+          type="button"
         >
-
+          Start over
+        </button>
       </div>
-
-      <p
-        class="counter"
-        id="counter"
-      >
-        0 / 8 items
-      </p>
-
 
     </section>
 
   </main>
 
+  <!-- Viewport information -->
+  <p
+    class="screen-message"
+    id="screenMessage"
+    aria-live="polite"
+  ></p>
 
   <script src="script.js"></script>
 
 </body>
-
 </html>

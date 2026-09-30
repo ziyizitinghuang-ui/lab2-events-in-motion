@@ -5,598 +5,496 @@
 html,
 body {
   margin: 0;
-  padding: 0;
-  width: 100%;
   min-height: 100%;
 }
 
 body {
   min-height: 100vh;
-
-  background: #f4efe5;
-  color: #292620;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
   overflow-x: hidden;
+  font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+  color: #443a34;
 }
 
+/* Background */
+
+.store-background {
+  position: fixed;
+  inset: -22px;
+  background-image:
+    linear-gradient(
+      rgba(255, 250, 247, 0.22),
+      rgba(247, 241, 237, 0.12)
+    ),
+    url("images/store-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(8px) saturate(0.68) brightness(1.07);
+  transform: scale(1.045);
+  z-index: -10;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 250, 246, 0.02) 25%,
+      rgba(255, 248, 244, 0.10) 100%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.16),
+      rgba(255, 255, 255, 0.015) 42%,
+      rgba(226, 219, 212, 0.05)
+    );
+  z-index: -9;
+}
+
+/* Page */
 
 .page {
-  width: 100%;
-  min-height: 100vh;
-
-  padding-top: 35px;
-  padding-bottom: 45px;
-
   position: relative;
+  width: min(1440px, 100%);
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 30px 28px 48px;
 }
 
-
-.page-header {
+.header {
   position: relative;
-  z-index: 100;
-
+  z-index: 30;
+  width: 100%;
+  margin: 0 auto;
   text-align: center;
 }
 
-.page-header h1 {
+h1 {
   margin: 0;
+  font-family: "Chalkboard SE", "Bradley Hand", "Comic Sans MS", cursive;
+  font-size: clamp(42px, 4.35vw, 60px);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+  color: #463a34;
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.65);
+}
 
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size: clamp(52px, 5vw, 78px);
-
+.instruction {
+  margin: 10px 0 0;
+  font-size: 16px;
   font-weight: 500;
-
-  line-height: 1;
-
-  letter-spacing: -2px;
-
-  color: #292620;
+  letter-spacing: 0.005em;
+  color: #5a4d46;
+  text-shadow: 0 1px 7px rgba(255, 255, 255, 0.9);
 }
 
-.page-header p {
-  margin: 18px 0 0;
-
-  font-size: 17px;
-
-  color: #625d55;
+.hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 8px 0 0;
+  text-shadow: 0 1px 7px rgba(255, 255, 255, 0.95);
 }
 
+.click-hint {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  color: rgba(77, 64, 57, 0.88);
+}
 
-.grocery-scene {
-  width: min(1200px, 94vw);
-  height: 720px;
+.keyboard-hint {
+  display: inline-block;
+  padding: 5px 11px;
+  border: 1px solid rgba(91, 72, 61, 0.27);
+  border-radius: 14px;
+  background: rgba(255, 251, 246, 0.70);
+  color: #4f4038;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  box-shadow: 0 2px 8px rgba(51, 40, 34, 0.055);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
 
-  margin: 5px auto 0;
+.keyboard-hint strong {
+  font-weight: 700;
+  color: #3e3029;
+}
 
+/* Grocery area */
+
+.grocery-area {
   position: relative;
-}
-
-
-
-.grocery-item {
-  margin: 0;
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  appearance: none;
-  -webkit-appearance: none;
-
-  position: absolute;
-
-  cursor: pointer;
-
-  z-index: 30;
-
-  user-select: none;
-  -webkit-user-select: none;
-
-  -webkit-tap-highlight-color: transparent;
-
-  transition:
-    transform 0.22s ease,
-    opacity 0.28s ease,
-    filter 0.22s ease;
-}
-
-
-.grocery-item img {
-  display: block;
-
-  width: 100%;
-  height: 100%;
-
-  object-fit: contain;
-
-  pointer-events: none;
-
-  filter:
-    drop-shadow(
-      0 9px 7px
-      rgba(45, 34, 25, 0.18)
-    );
-}
-
-
-
-.grocery-item:hover {
-  transform:
-    translateY(-7px)
-    rotate(var(--rotation))
-    scale(1.055);
-
-  z-index: 50;
-}
-
-
-.grocery-item:focus-visible {
-  outline:
-    2px solid
-    rgba(73, 57, 43, 0.6);
-
-  outline-offset: 5px;
-}
-
-
-.grocery-item.added {
-  opacity: 0;
-
-  pointer-events: none;
-
-  transform:
-    scale(0.75)
-    rotate(var(--rotation));
-}
-
-/* condensed milk */
-
-.grocery-item.condensed {
-  width: 86px;
-  height: 170px;
-
-  left: 145px;
-  top: 55px;
-
-  --rotation: 4deg;
-
-  transform:
-    rotate(var(--rotation));
-}
-
-
-/* clinkers */
-
-.grocery-item.clinkers {
-  width: 150px;
-  height: 205px;
-
-  left: 325px;
-  top: 20px;
-
-  --rotation: -6deg;
-
-  transform:
-    rotate(var(--rotation));
-}
-
-
-/* coffee */
-
-.grocery-item.coffee {
-  width: 105px;
-  height: 160px;
-
-  left: 630px;
-  top: 30px;
-
-  --rotation: 2deg;
-
-  transform:
-    rotate(var(--rotation));
-}
-
-
-/* gummy */
-
-.grocery-item.gummy {
-  width: 120px;
-  height: 125px;
-
-  right: 100px;
-  top: 145px;
-
-  --rotation: 8deg;
-
-  transform:
-    rotate(var(--rotation));
-}
-
-
-/* ice cream */
-
-.grocery-item.icecream {
-  width: 150px;
-  height: 170px;
-
-  left: -15px;
-  top: 300px;
-
-  --rotation: -7deg;
-
-  transform:
-    rotate(var(--rotation));
-}
-
-
-/* kombucha */
-
-.grocery-item.kombucha {
-  width: 125px;
-  height: 190px;
-
-  right: -5px;
-  top: 325px;
-
-  --rotation: 5deg;
-
-  transform:
-    rotate(var(--rotation));
-}
-
-
-/* snickers */
-
-.grocery-item.snickers {
-  width: 170px;
-  height: 72px;
-
-  left: 60px;
-  top: 525px;
-
-  --rotation: 4deg;
-
-  transform:
-    rotate(var(--rotation));
-}
-
-
-/* cookies */
-
-.grocery-item.cookies {
-  width: 180px;
-  height: 185px;
-
-  right: 120px;
-  top: 475px;
-
-  --rotation: -8deg;
-
-  transform:
-    rotate(var(--rotation));
+  width: min(1220px, 96vw);
+  height: 680px;
+  margin: 6px auto 0;
 }
 
 .basket {
   position: absolute;
-
-  width: 650px;
-  height: 430px;
-
   left: 50%;
-  top: 285px;
-
-  transform:
-    translateX(-50%);
-
-  z-index: 10;
+  top: 51%;
+  transform: translate(-50%, -50%);
+  width: min(650px, 58vw);
+  aspect-ratio: 1.5;
+  z-index: 5;
+  pointer-events: none;
 }
 
 .basket-image {
   position: absolute;
-
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   object-fit: contain;
-
-  display: block;
-
-  z-index: 5;
-
+  z-index: 1;
   pointer-events: none;
-
-  mix-blend-mode: multiply;
+  filter: drop-shadow(0 12px 15px rgba(42, 32, 27, 0.14));
 }
 
-.basket-items {
+/* Grocery items */
+
+.grocery {
   position: absolute;
-
-  left: 12%;
-  top: 18%;
-
-  width: 76%;
-  height: 65%;
-
-  z-index: 15;
-
-  pointer-events: none;
-
-  overflow: visible;
-}
-
-
-.basket-item {
-  position: absolute;
-
-  display: block;
-
-  object-fit: contain;
-
-  pointer-events: none;
-
-  transform-origin:
-    center center;
-
-  filter:
-    drop-shadow(
-      0 8px 7px
-      rgba(40, 29, 20, 0.25)
-    );
-
-  animation:
-    dropIntoBasket
-    0.5s
-    cubic-bezier(
-      0.2,
-      0.8,
-      0.3,
-      1.15
-    )
-    forwards;
-}
-
-
-.basket-item[data-item="icecream"] {
-  width: 39%;
-  height: 72%;
-
-  left: 0%;
-  top: 27%;
-
-  z-index: 7;
-
-  --basket-rotation: -8deg;
-
-  rotate:
-    var(--basket-rotation);
-}
-
-.basket-item[data-item="kombucha"] {
-  width: 31%;
-  height: 84%;
-
-  left: 9%;
-  top: 5%;
-
-  z-index: 4;
-
-  --basket-rotation: 5deg;
-
-  rotate:
-    var(--basket-rotation);
-}
-
-.basket-item[data-item="condensed"] {
-  width: 25%;
-  height: 86%;
-
-  left: 26%;
-  top: 2%;
-
-  z-index: 5;
-
-  --basket-rotation: 6deg;
-
-  rotate:
-    var(--basket-rotation);
-}
-
-.basket-item[data-item="clinkers"] {
-  width: 43%;
-  height: 94%;
-
-  left: 32%;
-  top: -2%;
-
-  z-index: 8;
-
-  --basket-rotation: -5deg;
-
-  rotate:
-    var(--basket-rotation);
-}
-
-
-.basket-item[data-item="coffee"] {
-  width: 28%;
-  height: 86%;
-
-  left: 58%;
-  top: 3%;
-
-  z-index: 5;
-
-  --basket-rotation: 5deg;
-
-  rotate:
-    var(--basket-rotation);
-}
-
-.basket-item[data-item="gummy"] {
-  width: 35%;
-  height: 69%;
-
-  left: 69%;
-  top: 26%;
-
-  z-index: 9;
-
-  --basket-rotation: 10deg;
-
-  rotate:
-    var(--basket-rotation);
-}
-
-
-.basket-item[data-item="cookies"] {
-  width: 45%;
-  height: 80%;
-
-  left: 48%;
-  top: 24%;
-
-  z-index: 11;
-
-  --basket-rotation: 6deg;
-
-  rotate:
-    var(--basket-rotation);
-}
-
-.basket-item[data-item="snickers"] {
-  width: 55%;
-  height: 34%;
-
-  left: 22%;
-  top: 70%;
-
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: pointer;
   z-index: 12;
-
-  --basket-rotation: -3deg;
-
-  rotate:
-    var(--basket-rotation);
+  transform-origin: center;
+  transition:
+    left 0.65s cubic-bezier(.22, .8, .28, 1),
+    right 0.65s cubic-bezier(.22, .8, .28, 1),
+    top 0.65s cubic-bezier(.22, .8, .28, 1),
+    transform 0.65s cubic-bezier(.22, .8, .28, 1);
+  -webkit-tap-highlight-color: transparent;
 }
 
-@keyframes dropIntoBasket {
+.grocery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  pointer-events: none;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  filter: drop-shadow(0 7px 7px rgba(37, 28, 23, 0.20));
+}
 
-  0% {
-    opacity: 0;
+.grocery:not(.in-basket):hover img {
+  transform: translateY(-3px) scale(1.035);
+  filter: drop-shadow(0 10px 10px rgba(37, 28, 23, 0.24));
+}
 
-    translate:
-      0
-      -80px;
+.grocery:focus-visible {
+  outline: 2px solid rgba(74, 58, 47, 0.55);
+  outline-offset: 7px;
+}
 
-    scale: 1.18;
-  }
+/* Starting positions */
 
+.grocery-clinkers {
+  width: 195px;
+  left: 8%;
+  top: 3%;
+  transform: rotate(-5deg);
+}
 
-  65% {
-    opacity: 1;
+.grocery-condensed {
+  width: 120px;
+  left: 0%;
+  top: 30%;
+  transform: rotate(-3deg);
+}
 
-    translate:
-      0
-      6px;
+.grocery-icecream {
+  width: 205px;
+  left: 0%;
+  top: 56%;
+  transform: rotate(-4deg);
+}
 
-    scale: 0.97;
-  }
+.grocery-snickers {
+  width: 275px;
+  left: 15%;
+  top: 82%;
+  transform: rotate(2deg);
+}
 
+.grocery-coffee {
+  width: 145px;
+  right: 15%;
+  top: 4%;
+  transform: rotate(2deg);
+}
 
-  100% {
-    opacity: 1;
+.grocery-gummy {
+  width: 155px;
+  right: 0%;
+  top: 32%;
+  transform: rotate(6deg);
+}
 
-    translate:
-      0
-      0;
+.grocery-kombucha {
+  width: 170px;
+  right: 0%;
+  top: 58%;
+  transform: rotate(3deg);
+}
 
-    scale: 1;
-  }
+.grocery-cookies {
+  width: 220px;
+  right: 10%;
+  top: 80%;
+  transform: rotate(-4deg);
+}
 
+/* Items in basket */
+
+.grocery.in-basket {
+  cursor: default;
+  pointer-events: none;
+}
+
+.grocery-kombucha.in-basket {
+  left: 34%;
+  right: auto;
+  top: 30%;
+  transform: rotate(-3deg);
+  z-index: 13;
+}
+
+.grocery-condensed.in-basket {
+  left: 43%;
+  right: auto;
+  top: 34%;
+  transform: rotate(2deg);
+  z-index: 15;
+}
+
+.grocery-clinkers.in-basket {
+  left: 47%;
+  right: auto;
+  top: 26%;
+  transform: rotate(-3deg);
+  z-index: 14;
+}
+
+.grocery-coffee.in-basket {
+  left: 59%;
+  right: auto;
+  top: 32%;
+  transform: rotate(2deg);
+  z-index: 13;
+}
+
+.grocery-icecream.in-basket {
+  left: 34%;
+  right: auto;
+  top: 37%;
+  transform: rotate(-5deg);
+  z-index: 18;
+}
+
+.grocery-cookies.in-basket {
+  left: 51%;
+  right: auto;
+  top: 41%;
+  transform: rotate(-4deg);
+  z-index: 17;
+}
+
+.grocery-gummy.in-basket {
+  left: 60%;
+  right: auto;
+  top: 48%;
+  transform: rotate(7deg);
+  z-index: 19;
+}
+
+.grocery-snickers.in-basket {
+  left: 41%;
+  right: auto;
+  top: 54%;
+  transform: rotate(1deg);
+  z-index: 20;
+}
+
+/* Basket information */
+
+.basket-info {
+  position: absolute;
+  left: 50%;
+  top: calc(51% + 235px);
+  transform: translateX(-50%);
+  min-width: 210px;
+  text-align: center;
+  z-index: 40;
 }
 
 .counter {
-  position: absolute;
-
-  left: 50%;
-  top: 700px;
-
-  transform:
-    translateX(-50%);
-
+  display: inline-block;
   margin: 0;
-
-  font-size: 16px;
-
-  letter-spacing: 0.3px;
-
-  color: #625d55;
-
-  z-index: 60;
+  padding: 5px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 18px;
+  background: rgba(251, 248, 243, 0.76);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #574b44;
+  box-shadow: 0 3px 12px rgba(44, 34, 29, 0.045);
 }
 
-
-.counter.complete {
-  font-weight: 600;
-
-  color: #40382f;
+.reset-button {
+  display: none;
+  margin: 9px auto 0;
+  padding: 2px 1px 3px;
+  border: 0;
+  border-bottom: 1px solid rgba(79, 66, 58, 0.42);
+  background: transparent;
+  color: rgba(77, 64, 56, 0.76);
+  font: 12px "Avenir Next", Avenir, sans-serif;
+  letter-spacing: 0.015em;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-@media (max-width: 1000px) {
-
-  .grocery-scene {
-    width: 1100px;
-
-    left: 50%;
-
-    margin-left: -550px;
-
-    transform:
-      scale(0.84);
-
-    transform-origin:
-      top center;
-  }
-
+.reset-button.visible {
+  display: block;
 }
 
-@media (max-width: 700px) {
+.reset-button:hover {
+  color: #3e342f;
+  border-color: rgba(62, 52, 47, 0.75);
+}
 
+body.complete .counter {
+  background: rgba(250, 246, 239, 0.82);
+}
+
+/* Viewport display */
+
+.screen-message {
+  position: fixed;
+  right: 15px;
+  bottom: 13px;
+  margin: 0;
+  padding: 5px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  background: rgba(250, 248, 244, 0.58);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  font-size: 9.5px;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+  color: rgba(67, 57, 51, 0.56);
+  box-shadow: 0 2px 8px rgba(38, 31, 27, 0.03);
+  z-index: 50;
+}
+
+/* Responsive layout */
+
+@media (max-width: 900px) {
   .page {
     padding-top: 25px;
   }
 
-
-  .page-header h1 {
-    font-size: 42px;
-
-    letter-spacing: -1px;
+  h1 {
+    font-size: clamp(39px, 8vw, 54px);
   }
 
-
-  .page-header p {
-    margin-top: 13px;
-
-    font-size: 15px;
+  .grocery-area {
+    width: 96vw;
+    height: 650px;
   }
 
+  .basket {
+    width: min(650px, 72vw);
+  }
+}
 
-  .grocery-scene {
-    transform:
-      scale(0.62);
-
-    margin-top: 10px;
+@media (max-width: 650px) {
+  .page {
+    padding: 22px 8px 40px;
   }
 
+  h1 {
+    font-size: 37px;
+  }
+
+  .instruction {
+    font-size: 14px;
+  }
+
+  .hint {
+    gap: 7px;
+  }
+
+  .click-hint {
+    font-size: 12px;
+  }
+
+  .keyboard-hint {
+    padding: 4px 9px;
+    font-size: 11px;
+  }
+
+  .grocery-area {
+    height: 610px;
+  }
+
+  .basket {
+    width: 88vw;
+  }
+
+  .grocery-condensed {
+    width: 78px;
+  }
+
+  .grocery-clinkers {
+    width: 125px;
+  }
+
+  .grocery-coffee {
+    width: 90px;
+  }
+
+  .grocery-gummy {
+    width: 95px;
+  }
+
+  .grocery-kombucha {
+    width: 110px;
+  }
+
+  .grocery-icecream {
+    width: 130px;
+  }
+
+  .grocery-snickers {
+    width: 165px;
+  }
+
+  .grocery-cookies {
+    width: 140px;
+  }
+
+  .screen-message {
+    right: 8px;
+    bottom: 8px;
+    font-size: 8px;
+  }
 }

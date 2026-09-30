@@ -1,133 +1,124 @@
-const groceryItems =
-  document.querySelectorAll(
-    ".grocery-item"
-  );
+// Page elements
 
-const basketItems =
-  document.getElementById(
-    "basketItems"
-  );
+const groceries = document.querySelectorAll(".grocery");
+const counter = document.querySelector("#counter");
+const instruction = document.querySelector("#instruction");
+const resetButton = document.querySelector("#resetButton");
+const screenMessage = document.querySelector("#screenMessage");
 
-const counter =
-  document.getElementById(
-    "counter"
-  );
-
-const totalItems =
-  groceryItems.length;
-
+const totalItems = groceries.length;
 let itemsInBasket = 0;
 
 
+// Update the counter and instructions
 
-function updateCounter() {
+function updateInterface() {
+  counter.textContent = `${itemsInBasket} / ${totalItems} items`;
 
-  counter.textContent =
-    `${itemsInBasket} / ${totalItems} items`;
-
-
-  if (
-    itemsInBasket === totalItems
-  ) {
-
-    counter.classList.add(
-      "complete"
-    );
-
+  if (itemsInBasket === 0) {
+    instruction.textContent = "What are we getting today?";
+    document.body.classList.remove("complete");
+    resetButton.classList.remove("visible");
   }
 
+  else if (itemsInBasket < totalItems) {
+    const itemsLeft = totalItems - itemsInBasket;
+
+    if (itemsLeft === 1) {
+      instruction.textContent = "Just one more item!";
+    }
+
+    else {
+      instruction.textContent = `${itemsLeft} items left`;
+    }
+
+    document.body.classList.remove("complete");
+    resetButton.classList.add("visible");
+  }
+
+  else {
+    instruction.textContent = "Your grocery run is complete!";
+    counter.textContent =
+      `${itemsInBasket} / ${totalItems} items · complete`;
+
+    document.body.classList.add("complete");
+    resetButton.classList.add("visible");
+  }
 }
 
 
+// Add groceries to the basket
 
-function addToBasket(item) {
+groceries.forEach(function (grocery) {
+  grocery.addEventListener("click", function () {
 
+    if (grocery.classList.contains("in-basket")) {
+      return;
+    }
 
-  if (
-    item.classList.contains(
-      "added"
-    )
-  ) {
+    grocery.classList.add("in-basket");
+    itemsInBasket++;
 
-    return;
-
-  }
-
-
-
-  const itemName =
-    item.dataset.item;
-
-  const originalImage =
-    item.querySelector("img");
+    updateInterface();
+  });
+});
 
 
-  if (!originalImage) {
+// Reset the grocery run
 
-    return;
+function resetGroceryRun() {
+  groceries.forEach(function (grocery) {
+    grocery.classList.remove("in-basket");
+  });
 
-  }
-
-
-  const basketImage =
-    document.createElement(
-      "img"
-    );
-
-
-  basketImage.src =
-    originalImage.src;
-
-
-  basketImage.alt =
-    originalImage.alt;
-
-
-  basketImage.dataset.item =
-    itemName;
-
-
-  basketImage.classList.add(
-    "basket-item"
-  );
-
-
-
-  basketItems.appendChild(
-    basketImage
-  );
-
-
-  item.classList.add(
-    "added"
-  );
-
-
-
-  itemsInBasket += 1;
-
-
-  updateCounter();
-
+  itemsInBasket = 0;
+  updateInterface();
 }
 
+resetButton.addEventListener("click", function () {
+  resetGroceryRun();
+});
 
 
-groceryItems.forEach(
-  (item) => {
+// Press R to reset
 
-    item.addEventListener(
-      "click",
-      () => {
-
-        addToBasket(item);
-
-      }
-    );
-
+document.addEventListener("keydown", function (event) {
+  if (event.key === "r" || event.key === "R") {
+    resetGroceryRun();
   }
-);
+});
 
 
+// Show viewport information
 
-updateCounter();
+function updateViewportMessage() {
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  let viewType;
+
+  if (width < 650) {
+    viewType = "Compact view";
+  }
+
+  else if (width < 1000) {
+    viewType = "Medium view";
+  }
+
+  else {
+    viewType = "Wide view";
+  }
+
+  screenMessage.textContent =
+    `${viewType} · ${width} × ${height}`;
+}
+
+window.addEventListener("resize", function () {
+  updateViewportMessage();
+});
+
+
+// Initial setup
+
+updateInterface();
+updateViewportMessage();
